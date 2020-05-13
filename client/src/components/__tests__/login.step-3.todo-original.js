@@ -1,12 +1,7 @@
 // dealing with react's simulated events
 import React from 'react'
 import {generate} from 'til-client-test-utils'
-import {
-  renderIntoDocument,
-  Simulate,
-  cleanup,
-  fireEvent,
-} from 'react-testing-library'
+import {render, Simulate} from 'react-testing-library'
 import Login from '../login'
 
 // Due to the fact that our element is not in the document, the
@@ -27,13 +22,11 @@ import Login from '../login'
 // Extra bonus, rather than manually inserting the container into the document
 // check out the docs for react-testing-library and the renderIntoDocument method!
 
-afterEach(cleanup)
-
 test('calls onSubmit with the username and password when submitted', () => {
   // Arrange
   const fakeUser = generate.loginForm()
   const handleSubmit = jest.fn()
-  const {container, getByLabelText, getByText} = renderIntoDocument(
+  const {container, getByLabelText, getByText} = render(
     <Login onSubmit={handleSubmit} />,
   )
 
@@ -45,11 +38,7 @@ test('calls onSubmit with the username and password when submitted', () => {
   // Act
   usernameNode.value = fakeUser.username
   passwordNode.value = fakeUser.password
-  // Simulate.submit(formNode)
-
-  // son equivalentes
-  // submitButtonNode.click()
-  fireEvent.click(submitButtonNode) // blur o el evento que sea
+  Simulate.submit(formNode)
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)
@@ -66,8 +55,8 @@ test('calls onSubmit with the username and password when submitted', () => {
 /*
 http://ws.kcd.im/?ws=Testing&e=login.step-3%20(renderIntoDocument)&em=d7@hotmail.es
 */
-test('I submitted my elaboration and feedback', () => {
-  const submitted = true // change this when you've submitted!
+test.skip('I submitted my elaboration and feedback', () => {
+  const submitted = false // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////

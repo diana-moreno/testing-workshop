@@ -1,6 +1,6 @@
 // using helpful utilities
 import React from 'react'
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 // you'll need these:
 import {generate} from 'til-client-test-utils'
 import {render, Simulate} from 'react-testing-library'
