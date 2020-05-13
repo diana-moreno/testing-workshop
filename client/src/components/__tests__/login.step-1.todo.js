@@ -48,8 +48,8 @@ test('calls onSubmit with the username and password when submitted', () => {
 /*
 http://ws.kcd.im/?ws=Testing&e=login.step-1&em=d7@hotmail.es
 */
-test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+test('I submitted my elaboration and feedback', () => {
+  const submitted = true // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////

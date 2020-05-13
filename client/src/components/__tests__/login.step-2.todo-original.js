@@ -2,39 +2,36 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // you'll need these:
-import {generate} from 'til-client-test-utils'
-import {render, Simulate} from 'react-testing-library'
+// import {generate} from 'til-client-test-utils'
+// import {render, Simulate} from 'react-testing-library'
 // note that til-client-test-utils is found in `client/test/til-client-test-utils`
 import Login from '../login'
 
 test('calls onSubmit with the username and password when submitted', () => {
   // Arrange
   // use generate.loginForm() here
-  // const fakeUser = {username: 'chucknorris', password: '(╯°□°）╯︵ ┻━┻'}
-  const fakeUser = generate.loginForm()
+  const fakeUser = {username: 'chucknorris', password: '(╯°□°）╯︵ ┻━┻'}
   const handleSubmit = jest.fn()
   // use: render(<Login onSubmit={handleSubmit} />)
   // It'll give you back an object with
   // `getByLabelText` and `getByText` functions
   // so you don't need a div anymore!
-  const {container, getByLabelText, getByText} = render(
-    <Login onSubmit={handleSubmit} />,
-  )
+  const div = document.createElement('div')
+  ReactDOM.render(<Login onSubmit={handleSubmit} />, div)
 
-  const usernameNode = getByLabelText('Username')
-  const passwordNode = getByLabelText('Password')
-
-  const formNode = container.querySelector('form') // si sabemos que solo habrá un form en el componente
-  const submitButtonNode = getByText(/^Submit$/) // por defecto, no es case sensitive, si queremos que lo sea, hay que pasar una expresión regular. Normalmente no es importante
+  const inputs = div.querySelectorAll('input')
+  const usernameNode = inputs[0]
+  const passwordNode = inputs[1]
+  const formNode = div.querySelector('form')
+  const submitButtonNode = div.querySelector('button')
 
   usernameNode.value = fakeUser.username
   passwordNode.value = fakeUser.password
 
   // Act
   // Use Simulate.submit(formNode) instead of these two lines
-  Simulate.submit(formNode)
-  // const event = new window.Event('submit')
-  // formNode.dispatchEvent(event)
+  const event = new window.Event('submit')
+  formNode.dispatchEvent(event)
 
   // Assert
   // no change necessary here
@@ -52,8 +49,8 @@ test('calls onSubmit with the username and password when submitted', () => {
 /*
 http://ws.kcd.im/?ws=Testing&e=login.step-2%20(react-testing-library)&em=d7@hotmail.es
 */
-test('I submitted my elaboration and feedback', () => {
-  const submitted = true // change this when you've submitted!
+test.skip('I submitted my elaboration and feedback', () => {
+  const submitted = false // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////
