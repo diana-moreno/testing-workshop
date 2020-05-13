@@ -1,7 +1,7 @@
 // snapshot testing
 import React from 'react'
 import {generate} from 'til-client-test-utils'
-import {renderIntoDocument, render, cleanup} from 'react-testing-library'
+import {renderIntoDocument, cleanup} from 'react-testing-library'
 import Login from '../login'
 
 afterEach(cleanup)
@@ -28,12 +28,6 @@ test('calls onSubmit with the username and password when submitted', () => {
 })
 
 test('snapshot', () => {
-  const {container} = render(<Login />)
-  expect(container.firstChild).toMatchSnapshot() // se le puede poner nombre añadiendo un string dentro de la llamada
-  // el plugin que tiene instalado glamorous, actualmente deprecado por emotion, y con el plugin glamour añade todo el CSS al pantallazo. Si no usamos glamorous no tiene sentido usar el plugin glamour.
-
-  // container siempre es un div. Podemos hacer el snapshot con div o con fragment.
-
   // render the login, this will give you back an object with a `container` property
   // expect the `container` property to match a snapshot
 })
