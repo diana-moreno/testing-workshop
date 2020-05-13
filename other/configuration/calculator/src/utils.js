@@ -13,4 +13,6 @@ function getFormattedValue(value, language = 'en-US') {
   return formattedValue
 }
 
+// console.log(window)
+
 export {getFormattedValue}
